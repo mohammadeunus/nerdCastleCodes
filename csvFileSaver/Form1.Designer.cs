@@ -43,7 +43,7 @@
             // 
             // textBoxEmail
             // 
-            this.textBoxEmail.Location = new System.Drawing.Point(141, 82);
+            this.textBoxEmail.Location = new System.Drawing.Point(141, 111);
             this.textBoxEmail.Name = "textBoxEmail";
             this.textBoxEmail.Size = new System.Drawing.Size(138, 23);
             this.textBoxEmail.TabIndex = 0;
@@ -57,7 +57,7 @@
             // 
             // textBoxContact
             // 
-            this.textBoxContact.Location = new System.Drawing.Point(141, 111);
+            this.textBoxContact.Location = new System.Drawing.Point(141, 82);
             this.textBoxContact.Name = "textBoxContact";
             this.textBoxContact.Size = new System.Drawing.Size(138, 23);
             this.textBoxContact.TabIndex = 0;
@@ -74,7 +74,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(27, 85);
+            this.label3.Location = new System.Drawing.Point(27, 114);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(36, 15);
             this.label3.TabIndex = 1;
@@ -83,7 +83,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(27, 114);
+            this.label4.Location = new System.Drawing.Point(27, 85);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(93, 15);
             this.label4.TabIndex = 1;
@@ -154,6 +154,7 @@
             this.Controls.Add(this.textBoxEmail);
             this.Name = "Form1";
             this.Text = "Enter";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
