@@ -35,10 +35,11 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.buttonSearch = new System.Windows.Forms.Button();
             this.process1 = new System.Diagnostics.Process();
+            this.output = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // textBoxEmail
@@ -100,12 +101,12 @@
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.buttonInsertDataInCSV);
             // 
-            // textBox1
+            // textBoxSearch
             // 
-            this.textBox1.Location = new System.Drawing.Point(456, 77);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(138, 23);
-            this.textBox1.TabIndex = 0;
+            this.textBoxSearch.Location = new System.Drawing.Point(456, 77);
+            this.textBoxSearch.Name = "textBoxSearch";
+            this.textBoxSearch.Size = new System.Drawing.Size(138, 23);
+            this.textBoxSearch.TabIndex = 0;
             // 
             // label1
             // 
@@ -116,15 +117,16 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Search For Emails";
             // 
-            // button2
+            // buttonSearch
             // 
-            this.button2.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button2.Location = new System.Drawing.Point(401, 114);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(252, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Search";
-            this.button2.UseVisualStyleBackColor = false;
+            this.buttonSearch.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.buttonSearch.Location = new System.Drawing.Point(401, 114);
+            this.buttonSearch.Name = "buttonSearch";
+            this.buttonSearch.Size = new System.Drawing.Size(252, 23);
+            this.buttonSearch.TabIndex = 2;
+            this.buttonSearch.Text = "Search";
+            this.buttonSearch.UseVisualStyleBackColor = false;
+            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
             // 
             // process1
             // 
@@ -137,18 +139,27 @@
             this.process1.StartInfo.UserName = "";
             this.process1.SynchronizingObject = this;
             // 
+            // output
+            // 
+            this.output.AutoSize = true;
+            this.output.Location = new System.Drawing.Point(336, 247);
+            this.output.Name = "output";
+            this.output.Size = new System.Drawing.Size(0, 15);
+            this.output.TabIndex = 3;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(735, 302);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.output);
+            this.Controls.Add(this.buttonSearch);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textBoxSearch);
             this.Controls.Add(this.textBoxName);
             this.Controls.Add(this.textBoxContact);
             this.Controls.Add(this.textBoxEmail);
@@ -169,9 +180,10 @@
         private Label label3;
         private Label label4;
         private Button button1;
-        private TextBox textBox1;
+        private TextBox textBoxSearch;
         private Label label1;
-        private Button button2;
+        private Button buttonSearch;
         private System.Diagnostics.Process process1;
+        private Label output;
     }
 }
