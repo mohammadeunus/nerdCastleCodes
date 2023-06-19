@@ -38,6 +38,7 @@
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.textBoxContact = new System.Windows.Forms.TextBox();
             this.textBoxEmail = new System.Windows.Forms.TextBox();
+            this.labelOutput = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // buttonSearch
@@ -126,11 +127,21 @@
             this.textBoxEmail.Size = new System.Drawing.Size(138, 23);
             this.textBoxEmail.TabIndex = 6;
             // 
+            // labelOutput
+            // 
+            this.labelOutput.AutoSize = true;
+            this.labelOutput.Location = new System.Drawing.Point(392, 361);
+            this.labelOutput.Name = "labelOutput";
+            this.labelOutput.Size = new System.Drawing.Size(10, 15);
+            this.labelOutput.TabIndex = 13;
+            this.labelOutput.Text = " ";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.labelOutput);
             this.Controls.Add(this.buttonSearch);
             this.Controls.Add(this.buttonEnter);
             this.Controls.Add(this.label4);
@@ -160,5 +171,6 @@
         private TextBox textBoxName;
         private TextBox textBoxContact;
         private TextBox textBoxEmail;
+        private Label labelOutput;
     }
 }
