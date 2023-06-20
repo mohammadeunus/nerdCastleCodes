@@ -19,9 +19,9 @@ namespace DataToDatabaseSaver
             string sp_insert = "INSERT INTO PERSON (Name, Email, Contact) VALUES('" + textBoxName.Text + "', '" + textBoxEmail.Text + "','" + textBoxContact.Text + "'); ";
             SqlConnection CN = new SqlConnection(connectionString);
             CN.Open();
-            SqlCommand cmd = new SqlCommand(sp_insert, CN);
+            SqlCommand cmd = new SqlCommand(sp_insert, CN); //it only returns an integer specifying the number of rows inserted, updated or deleted.
 
-            int i = cmd.ExecuteNonQuery(); //it only returns an integer specifying the number of rows inserted, updated or deleted.
+            int i = cmd.ExecuteNonQuery(); 
 
             CN.Close();
             if (i > 0)
@@ -41,7 +41,7 @@ namespace DataToDatabaseSaver
                 { 
                     CN.Open();
 
-                    int count = (int)command.ExecuteScalar();
+                    int count = (int)command.ExecuteScalar(); //returns the first column of the first row in the database result set.
 
                     if (count > 0)
                     {
