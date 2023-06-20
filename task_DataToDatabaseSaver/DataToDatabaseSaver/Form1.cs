@@ -11,24 +11,25 @@ namespace DataToDatabaseSaver
         public Form1()
         {
             InitializeComponent();
-            
         }
 
         private void buttonEnter_Click(object sender, EventArgs e)
         {
             string sp_insert = "INSERT INTO PERSON (Name, Email, Contact) VALUES('" + textBoxName.Text + "', '" + textBoxEmail.Text + "','" + textBoxContact.Text + "'); ";
-            SqlConnection CN = new SqlConnection(connectionString);
-            CN.Open();
-            SqlCommand cmd = new SqlCommand(sp_insert, CN); //it only returns an integer specifying the number of rows inserted, updated or deleted.
-
-            int i = cmd.ExecuteNonQuery(); 
-
-            CN.Close();
-            if (i > 0)
+            using (SqlConnection CN = new SqlConnection(connectionString))
             {
-                labelOutput.Text = i + " Data Saved";
-            }
+                CN.Open();
+                using (SqlCommand cmd = new SqlCommand(sp_insert, CN)) 
+                {
+                    int i = cmd.ExecuteNonQuery(); //it only returns an integer specifying the number of rows inserted, updated or deleted.
 
+                    CN.Close();
+                    if (i > 0)
+                    {
+                        labelOutput.Text = i + " Data Saved";
+                    }
+                }
+            }
         }
 
         private void buttonSearch_Click(object sender, EventArgs e)
