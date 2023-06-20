@@ -6,17 +6,18 @@ namespace DataToDatabaseSaver
 {
     public partial class Form1 : Form
     {
-        public SqlConnection thisConnection = new SqlConnection(@"Data Source=DESKTOP-R0B9L4A\SQLEXPRESS;Initial Catalog=DataToDatabase;Integrated Security=True");
-        SqlConnection CN;
+        string connectionString = @"Data Source=DESKTOP-R0B9L4A\SQLEXPRESS;Initial Catalog=DataToDatabase;Integrated Security=True;TrustServerCertificate=True";
+        
         public Form1()
         {
             InitializeComponent();
-             CN = new SqlConnection();
+            
         }
 
         private void buttonEnter_Click(object sender, EventArgs e)
         {
-            string sp_insert = "INSERT INTO PERSON (Name, Email, ContactNumber) VALUES('" + textBoxName.Text + "', '" + textBoxEmail.Text + "','" + textBoxContact.Text + "'); ";
+            string sp_insert = "INSERT INTO PERSON (Name, Email, Contact) VALUES('" + textBoxName.Text + "', '" + textBoxEmail.Text + "','" + textBoxContact.Text + "'); ";
+            SqlConnection CN = new SqlConnection(connectionString);
             CN.Open();
             SqlCommand cmd = new SqlCommand(sp_insert, CN);
 
@@ -34,12 +35,14 @@ namespace DataToDatabaseSaver
         {
             try
             {
-                string querry_fetch = "SELECT * FROM PERSON where email='" + textBoxSearch.Text + "'";
+                SqlConnection CN = new SqlConnection(connectionString);
 
+                string querry_fetch = "SELECT * FROM PERSON where email='" + textBoxSearch.Text + "'";
+                CN.Open();
                 SqlCommand sdaa = new SqlCommand(querry_fetch, CN);
 
-                SqlDataReader da = sdaa.ExecuteReader();
-
+                var ik = sdaa.ExecuteReader();
+                labelOutput.Text= ik.ToString();
                 CN.Close();
             }
             catch (Exception ex)
