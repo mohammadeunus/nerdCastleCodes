@@ -21,7 +21,7 @@ namespace DataToDatabaseSaver
             CN.Open();
             SqlCommand cmd = new SqlCommand(sp_insert, CN);
 
-            int i = cmd.ExecuteNonQuery();
+            int i = cmd.ExecuteNonQuery(); //it only returns an integer specifying the number of rows inserted, updated or deleted.
 
             CN.Close();
             if (i > 0)
@@ -33,22 +33,29 @@ namespace DataToDatabaseSaver
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
-            try
-            {
-                SqlConnection CN = new SqlConnection(connectionString);
+            using (SqlConnection CN = new SqlConnection(connectionString))
+            { 
+                string query_fetch = "SELECT COUNT(*) FROM PERSON WHERE email = '" + textBoxSearch.Text + "'";
 
-                string querry_fetch = "SELECT * FROM PERSON where email='" + textBoxSearch.Text + "'";
-                CN.Open();
-                SqlCommand sdaa = new SqlCommand(querry_fetch, CN);
+                using (SqlCommand command = new SqlCommand(query_fetch, CN))
+                { 
+                    CN.Open();
 
-                var ik = sdaa.ExecuteReader();
-                labelOutput.Text= ik.ToString();
-                CN.Close();
+                    int count = (int)command.ExecuteScalar();
+
+                    if (count > 0)
+                    {
+                        // Email exists in the database
+                        labelOutput.Text = ("Email exists in the database.");
+                    }
+                    else
+                    {
+                        // Email does not exist in the database
+                        labelOutput.Text = ("Email does not exist in the database.");
+                    }
+                }
             }
-            catch (Exception ex)
-            {
-                labelOutput.Text = ex.Message;
-            }
+
         }
     }
 }
