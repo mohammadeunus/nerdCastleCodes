@@ -15,26 +15,37 @@ namespace csvFileSaver
             InitializeComponent();
 
         }
-          
         private void buttonInsertDataInCSV(object sender, EventArgs e)
         {
             Name = textBoxName.Text;
             Email = textBoxEmail.Text;
             ContactNumber = textBoxContact.Text;
 
+            // Check email format
+            if (!EmailHelper.IsValidEmail(Email))
+            {
+                output.Text = "Invalid email format.";
+                return;
+            }
 
+            //check if the CSV file already exists or not
             bool checkFileExistence = File.Exists(filePath);
             int lineCount = 0;
+
             if (checkFileExistence)
             {
                 lineCount = File.ReadLines(filePath).Count();
             }
 
+            if (EmailHelper.IsDuplicateEmail(Email, filePath))
+            {
+                output.Text = "Email address already exists.";
+                return;
+            }
 
             // Write the data to the CSV file
             using (StreamWriter writer = new StreamWriter(filePath, true))
             {
-                //// Check if the CSV file already exists
                 if (!checkFileExistence)
                 {
                     string csvHeaders = "Name,Email,Contact";
@@ -42,49 +53,35 @@ namespace csvFileSaver
                     lineCount += 1;
                 }
 
-                // Create a string with the property values separated by commas
                 string csvLine = $"{Name},{Email},{ContactNumber}";
-
-                // Write the line to the CSV file
                 writer.WriteLine(csvLine);
             }
 
-            //check line added or not
-            int lineCountNow = File.ReadLines(filePath).Count(); ;
+            // check line added or not
+            int lineCountNow = File.ReadLines(filePath).Count();
             if (lineCount < lineCountNow)
             {
-                output.Text = "data added successfull.";
+                output.Text = "Data added successfully.";
             }
             else
             {
-                output.Text = "operation failed, try again.";
+                output.Text = "Operation failed. Please try again.";
             }
-
         }
+         
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
         }
-        public bool getEmail(String searchName)
-        {
-            var strLines = File.ReadLines(filePath);
-            foreach (var line in strLines)
-            {
-                if (line.Split(',')[1].Equals(searchName))
-                {
-                    //(true,line.Split(',')[2]);
-                    return true;
-                }                            
-            }
-            return false;
-        }
 
         private void buttonSearch_Click(object sender, EventArgs e)
-        { 
-            if (getEmail(textBoxSearch.Text))
+        {
+            var userData = EmailHelper.isEmailAvailable(textBoxSearch.Text, filePath);
+            if (userData.Item1)
             {
-                output.Text = "email available in file";
+                output.Text = $"email found, user name is :{userData.Item2}";
             }
             else
             {
