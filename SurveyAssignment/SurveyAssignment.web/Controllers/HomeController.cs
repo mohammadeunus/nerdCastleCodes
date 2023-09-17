@@ -22,13 +22,13 @@ public class HomeController : Controller
     public IActionResult Index()
     {
         // localIPAddress 
-        string hostName = Dns.GetHostName();  
+        string hostName = Dns.GetHostName();
         string localIPAddress = Dns.GetHostByName(hostName).AddressList[0].ToString();
 
         // Dynamic IP addresses are assigned from a pool of available addresses, and they may change each time a user reconnects to the internet.
         string DynamicIpAddress = HttpContext.Connection.RemoteIpAddress.ToString();
         bool hasVoted = _context.Response.Any(r => r.UserIpAddress == localIPAddress);
-        
+
         if (hasVoted)
         {
             // If the user has already voted, redirect them to another action.
@@ -42,10 +42,22 @@ public class HomeController : Controller
         var responses = _context.Response.ToList(); // Replace with your actual data retrieval logic
 
         var groupedResponses = responses.GroupBy(r => r.Option)
-                                        .Select(group => new { Option = group.Key, Count = group.Count() })
+                                        .Select(group => new 
+                                        { 
+                                            Option = group.Key, 
+                                            Count = group.Count() 
+                                        })
                                         .ToList();
+        
+        var groupedResponses2 = groupedResponses.Select(item => new GroupedResponseModel
+                                {
+                                    Option = item.Option,
+                                    Count = item.Count
+                                })
+                                .ToList();
 
-        return View(groupedResponses);
+
+        return View(groupedResponses2);
     }
 
 
@@ -61,7 +73,7 @@ public class HomeController : Controller
 
         //dynamicIpAddress
         string userIpAddress = HttpContext.Connection.RemoteIpAddress.ToString();
-         
+
         // Save the response to the database.
         var response = new ResponseModel { Option = option, UserIpAddress = localIPAddress };
         _context.Response.Add(response);

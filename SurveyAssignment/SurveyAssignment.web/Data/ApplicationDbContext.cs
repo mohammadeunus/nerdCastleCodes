@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using SurveyAssignment.web.Entities;
+using SurveyAssignment.web.Models;
 
 namespace SurveyAssignment.web.Data;
 
