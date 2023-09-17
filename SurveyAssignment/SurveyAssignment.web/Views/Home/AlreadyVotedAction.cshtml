@@ -1,8 +1,33 @@
-﻿
+﻿@model List<SurveyAssignment.web.Entities.GroupedResponseModel>
+
 @{
     ViewData["Title"] = "AlreadyVotedAction";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>AlreadyVotedAction</h1>
+<p>Is Alexandre the great, president of China?</p>
 
+
+<div style="width: 80%;">
+    @foreach (var item in Model)
+    {
+        <div class="progress-container">
+            <span class="option-label">@item.Option</span>
+            @if (Model.Sum(x => x.Count) > 0)
+            {
+                var percentage = (item.Count / (double)Model.Sum(x => x.Count)) * 100;
+                <div class="progress">
+                    <div class="progress-bar" style="width: @percentage%;">
+                        @item.Count (@percentage.ToString("0.##") %)
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="progress">
+                    <div class="progress-bar" style="width: 0%;">0%</div>
+                </div>
+            }
+        </div>
+    }
+</div>
