@@ -41,23 +41,17 @@ public class HomeController : Controller
     {
         var responses = _context.Response.ToList(); // Replace with your actual data retrieval logic
 
-        var groupedResponses = responses.GroupBy(r => r.Option)
-                                        .Select(group => new 
-                                        { 
-                                            Option = group.Key, 
-                                            Count = group.Count() 
-                                        })
-                                        .ToList();
-        
-        var groupedResponses2 = groupedResponses.Select(item => new GroupedResponseModel
-                                {
-                                    Option = item.Option,
-                                    Count = item.Count
-                                })
-                                .ToList();
+        var groupedResponses = responses
+                .GroupBy(r => r.Option)
+                .Select(group => new GroupedResponseModel
+                {
+                    Option = group.Key,
+                    Count = group.Count()
+                })
+                .ToList();
 
 
-        return View(groupedResponses2);
+        return View(groupedResponses);
     }
 
 
