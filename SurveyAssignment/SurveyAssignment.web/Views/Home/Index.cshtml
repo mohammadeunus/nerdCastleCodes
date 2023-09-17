@@ -1,8 +1,28 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model SurveyAssignment.web.Entities.ResponseModel
+
+@{
+    ViewBag.Title = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container">
+    <h2>Question:</h2>
+    <p>Is my Nmae Mubin?</p>
+
+    <h3>Options:</h3>
+    <form method="post" action="@Url.Action("RecordResponse", "Home")">
+
+        <label>
+            <input type="radio" name="option" value="Yes" /> Yes
+        </label><br />
+
+        <label>
+            <input type="radio" name="option" value="No" /> No
+        </label><br />
+
+        <label>
+            <input type="radio" name="option" value="No Comment" /> No Comment
+        </label><br />
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 </div>
